@@ -1,13 +1,13 @@
 #include "monty.h"
 
 /**
- * push_error - push error (handling)
- * @fd: file desciptor
- * @line: buffer
- * @stack: stack or queue
- * @count: line command
+ * p_error - handle push error
+ * @fd: a file desciptor
+ * @line: is a buffer
+ * @stack: a stack or queue
+ * @count: a line command
  */
-void _push_error(FILE *fd, char *line, stack_t *stack, int count)
+void p_error(FILE *fd, char *line, stack_t *stack, int count)
 {
 	dprintf(STDERR_FILENO, "L%u: usage: push integer\n", count);
 	fclose(fd);
@@ -17,14 +17,14 @@ void _push_error(FILE *fd, char *line, stack_t *stack, int count)
 }
 
 /**
- * ins_error - handler the Error 
- * @fd: file descriptor
+ * ins_error - to hadle the Error 
  * @line: is a buffer
+ * @fd: a file descriptor
  * @stack: is a stack or queue
  * @count: is a line command
  * @element: number
  */
-void _han_error(FILE *fd, char *line, stack_t *stack, char *count, int item)
+void in_error(FILE *fd, char *line, stack_t *stack, char *count, int element)
 {
 	dprintf(STDERR_FILENO, "L%u: unknown instruction %s\n", element, count);
 	fclose(fd);

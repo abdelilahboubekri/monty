@@ -1,9 +1,8 @@
 #include "monty.h"
 
 global_t global = {NULL, NULL};
-
 /**
- * main - Entry point
+ * main - to Entry point
  * @argc: Number of arguments
  * @argv: Arguments
  * Return: number of arguments.
@@ -12,7 +11,7 @@ global_t global = {NULL, NULL};
 int main(int argc, char *argv[])
 {
 	if (argc == 2)
-		handle(argv[1]);
+		handleargv[1]);
 	else
 	{
 		dprintf(STDERR_FILENO, "USAGE: monty file\n");
@@ -20,18 +19,16 @@ int main(int argc, char *argv[])
 	}
 	return (0);
 }
-
 /**
- * handle_command - Read file
+ * handle- Read the file
  * @argv: Arguments
- * Return: Nothing
+ * Return: no Return
  */
-
 void handle(char *argv)
 {
 	int count = 0, result = 0;
 	size_t bufsize = 0;
-	char *arguments = NULL, *item = NULL;
+	char *arguments = NULL, *element = NULL;
 	stack_t *stack = NULL;
 
 	global.fd = fopen(argv, "r");
@@ -48,12 +45,12 @@ void handle(char *argv)
 			}
 			else if (*arguments == '#')
 				continue;
-			item = strtok(NULL, " \n\t\r");
-			result = get_opc(&stack, arguments, item, count);
+			element = strtok(NULL, " \n\t\r");
+			result = get_opc(&stack, arguments, element, count);
 			if (result == 1)
-				push_error(global.fd, global.line, stack, count);
+				p_error(global.fd, global.line, stack, count);
 			else if (result == 2)
-				ins_error(global.fd, global.line, stack, arguments, count);
+				in_error(global.fd, global.line, stack, arguments, count);
 		}
 		free(global.line);
 		free_dlistint(stack);
@@ -65,16 +62,14 @@ void handle(char *argv)
 		exit(EXIT_FAILURE);
 	}
 }
-
 /**
- * get_opc - it's a function to handle the opcode
- * @stack:  stack or queue
- * @arg:  parameter
- * @element:  parameter
- * @count:  line command
+ * get_opc - A  function to handle the opcode
+ * @stack: A stack or queue
+ * @arg: A parameter
+ * @element: is a parameter
+ * @count: line command
  * Return: no return
  */
-
 int get_opc(stack_t **stack, char *arg, char *element, int count)
 {
 	int i = 0;
@@ -102,7 +97,7 @@ int get_opc(stack_t **stack, char *arg, char *element, int count)
 		{
 			if (!strcmp(arg, "push"))
 			{
-				if (_isdigit(item) == 1)
+				if (_isdigit(element) == 1)
 					value = atoi(element);
 				else
 					return (1);

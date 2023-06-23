@@ -86,7 +86,6 @@ void free_dlistint(stack_t *stack)
  * @stack: Stack list
  * @line_number: Number of the line
  */
-
 void _pint(stack_t **stack, unsigned int line_num)
 {
 	if (!*stack || !stack)
