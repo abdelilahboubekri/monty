@@ -133,6 +133,7 @@ void _pstr(stack_t **stack, unsigned int line_num)
  * @stack: Stack
  * @line_number: Number of the line
  */
+
 void _swap(stack_t **stack, unsigned int line_num)
 {
 	stack_t *current = *stack;
@@ -148,18 +149,21 @@ void _swap(stack_t **stack, unsigned int line_num)
 	current->n = current->next->n;
 	current->next->n = temp;
 }
+
 /**
  * _pop - function to  removes the top element of the stack.
  * @stack: Stack list
  * @line_num: Number of the line
  */
+
 void _pop(stack_t **stack, unsigned int line_num)
+
 {
 	stack_t *current = NULL;
 
 	if (*stack == NULL || stack == NULL)
 	{
-		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line_number);
+		dprintf(STDERR_FILENO, "L%d: can't pop an empty stack\n", line_num);
 		cleanStack(stack);
 		exit(EXIT_FAILURE);
 	}
@@ -171,11 +175,13 @@ void _pop(stack_t **stack, unsigned int line_num)
 		current->next->prev = current->prev;
 	free(current);
 }
+
 /**
  * _add - to function add two integer
  * @stack: Stack list
  * @line_num: Number of the line
  */
+
 void _add(stack_t **stack, unsigned int line_num)
 {
 	stack_t *current = NULL;
