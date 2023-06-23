@@ -54,9 +54,9 @@ typedef struct global_s
 	char *line;
 } global_t;
 extern global_t global;
-extern int value;;
+extern int value;
 
-void h_command(char *argv);
+void handle(char *argv);
 
 int get_opc(stack_t **stack, char *arg, char *item, int count);
 
