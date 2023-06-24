@@ -3,12 +3,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/types.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
-#include <string.h>
+
+#define STACK 0
+#define QUEUE 1
+#define DELIMS " \n\t\a\b"
+
+extern char **op_toks;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -17,9 +18,8 @@
  * @next: points to the next element of the stack (or queue)
  *
  * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO  project
+ * for stack, queues, LIFO, FIFO Holberton project
  */
-
 typedef struct stack_s
 {
 	int n;
@@ -33,58 +33,53 @@ typedef struct stack_s
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
- * for stack, queues, LIFO, FIFO  project
+ * for stack, queues, LIFO, FIFO Holberton project
  */
-
 typedef struct instruction_s
 {
 	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
+	void (*f)(stack_t **stack, unsigned int line_num);
 } instruction_t;
 
-/**
- * struct glob_s - global and its funcs
- * @fd: File descriptor
- * @line: Line to getline
- *
- * Description: To handle the file and getline
- */
-
-typedef struct global_s
-{
-	FILE *fd;
-	char *line;
-} global_t;
-
-extern global_t global;
-extern int value;
-
-void handle(char *argv);
-
-int get_opc(stack_t **stack, char *arg, char *item, int count);
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int check_mode(stack_t *stack);
+void free_tokens(void);
+unsigned int token_arr_len(void);
+int run_monty(FILE *script_fd);
+void set_op_tok_error(int error_code);
 
 void _push(stack_t **stack, unsigned int line_num);
-void _pall(stack_t **stack, unsigned int line_numb);
-void _pint(stack_t **stack, unsigned int line_numb);
-void _swap(stack_t **stack, unsigned int line_numb);
+void _pall(stack_t **stack, unsigned int line_num);
+void _pint(stack_t **stack, unsigned int line_num);
 void _pop(stack_t **stack, unsigned int line_num);
+void _swap(stack_t **stack, unsigned int line_num);
 void _add(stack_t **stack, unsigned int line_num);
-void _sub(stack_t **stack, unsigned int line_num);
 void _nop(stack_t **stack, unsigned int line_num);
+void _sub(stack_t **stack, unsigned int line_num);
 void _div(stack_t **stack, unsigned int line_num);
 void _mul(stack_t **stack, unsigned int line_num);
 void _mod(stack_t **stack, unsigned int line_num);
 void _pchar(stack_t **stack, unsigned int line_num);
-void _pstr(stack_t **stack, unsigned int line_numb);
-void free_dlistint(stack_t *stack);
-void cleanStack(stack_t **stack);
+void _pstr(stack_t **stack, unsigned int line_num);
+void _rotl(stack_t **stack, unsigned int line_num);
+void _rotr(stack_t **stack, unsigned int line_num);
+void _stack(stack_t **stack, unsigned int line_num);
+void _queue(stack_t **stack, unsigned int line_num);
 
-/*Help*/
-int _isdigit(char *c);
-stack_t *new_Node(int n);
+char **strtow(char *str, char *delims);
+char *get_int(int n);
 
-/* to handle_errors */
-void p_error(FILE *fd, char *line, stack_t *stack, int count);
-void in_error(FILE *fd, char *line, stack_t *stack, char *count, int element);
+int _usage_error(void);
+int _malloc_error(void);
+int file_openError(char *filename);
+int unknown_op_error(char *opcode, unsigned int line_num);
+int no_int_error(unsigned int line_num);
+int _pop_error(unsigned int line_num);
+int _pint_error(unsigned int line_num);
+int _short_stack_error(unsigned int line_num, char *op);
+int _div_error(unsigned int line_num);
+int _pchar_error(unsigned int line_num, char *message);
+
 
 #endif
