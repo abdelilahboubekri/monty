@@ -46,7 +46,7 @@ int init_stack(stack_t **stack);
 int check_mode(stack_t *stack);
 void free_tokens(void);
 unsigned int token_arr_len(void);
-int run_monty(FILE *script_fd);
+int for_running_monty(FILE *script_fd);
 void set_op_tok_error(int error_code);
 
 void _push(stack_t **stack, unsigned int line_num);
